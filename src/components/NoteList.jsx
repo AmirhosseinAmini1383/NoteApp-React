@@ -32,7 +32,7 @@ function NoteItem({ note, onDeleteNote, onComplete }) {
             name={note.id}
             id={note.id}
             value={note.id}
-            // checked={note.completed}
+            checked={note.completed}
           />
         </div>
       </div>

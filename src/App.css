@@ -48,6 +48,13 @@
   color: var(--text-100);
 }
 
+.status {
+  font-weight: 500;
+  font-size: 1.2rem;
+  text-align: center;
+  color: var(--text-700);
+}
+
 .note-item {
   padding: 1rem;
   background-color: #fff;
