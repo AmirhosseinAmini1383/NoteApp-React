@@ -42,7 +42,9 @@ function NoteItem({ note, onDeleteNote, onComplete }) {
           <p className="desc">{note.description}</p>
         </div>
         <div className="actions">
-          <button onClick={() => onDeleteNote(note.id)}>❌</button>
+          <button onClick={() => onDeleteNote(note.id)}>
+            <img src="../../public/assets/icons/trash.png" alt="" />
+          </button>
           <input
             onChange={onComplete}
             type="checkbox"

@@ -1,3 +1,5 @@
+import Message from "./Message";
+
 function NoteStatus({ notes }) {
   const allNotes = notes.length;
   const completedNotes = notes.filter((n) => n.completed).length;
@@ -15,7 +17,9 @@ function NoteStatus({ notes }) {
       </li>
     </ul>
   ) : (
-    <p className="status">No Notes has already been added.</p>
+    <Message>
+      <p className="status">No Notes has already been added.</p>
+    </Message>
   );
 }
 
