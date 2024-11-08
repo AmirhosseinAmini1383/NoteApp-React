@@ -1,4 +1,7 @@
-function NoteList({ notes, onDeleteNote, onComplete, sortBy }) {
+import { useNotes, useNotesDispatch } from "../context/NotesContext";
+
+function NoteList({ sortBy }) {
+  const notes = useNotes();
   let sortedNotes = notes;
   if (sortBy === "earliest") {
     sortedNotes = [...notes].sort(
@@ -19,12 +22,7 @@ function NoteList({ notes, onDeleteNote, onComplete, sortBy }) {
   return (
     <div className="note-list">
       {sortedNotes.map((note) => (
-        <NoteItem
-          key={note.id}
-          note={note}
-          onDeleteNote={onDeleteNote}
-          onComplete={onComplete}
-        />
+        <NoteItem key={note.id} note={note} />
       ))}
     </div>
   );
@@ -32,7 +30,8 @@ function NoteList({ notes, onDeleteNote, onComplete, sortBy }) {
 
 export default NoteList;
 
-function NoteItem({ note, onDeleteNote, onComplete }) {
+function NoteItem({ note }) {
+  const dispatch = useNotesDispatch();
   const options = { year: "numeric", month: "long", day: "numeric" };
   return (
     <div className={`note-item ${note.completed ? "completed" : ""}`}>
@@ -42,11 +41,16 @@ function NoteItem({ note, onDeleteNote, onComplete }) {
           <p className="desc">{note.description}</p>
         </div>
         <div className="actions">
-          <button onClick={() => onDeleteNote(note.id)}>
+          <button
+            onClick={() => dispatch({ type: "DELETE_NOTE", payload: note.id })}
+          >
             <img src="../../public/assets/icons/trash.png" alt="" />
           </button>
           <input
-            onChange={onComplete}
+            onChange={(e) => {
+              const noteId = +e.target.value;
+              dispatch({ type: "COMPLETE_NOTE", payload: noteId });
+            }}
             type="checkbox"
             name={note.id}
             id={note.id}
