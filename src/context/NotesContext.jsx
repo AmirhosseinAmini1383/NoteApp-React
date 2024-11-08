@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
-import useLocalStorage from "./useLocalStorage";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const NotesContext = createContext(null);
 const NotesDispatchContext = createContext(null);
